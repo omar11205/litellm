@@ -5,6 +5,8 @@ from openai import OpenAI
 from typing import List, Dict, Any
 import json  # Import json for saving results
 import datetime  # Import datetime for unique filenames
+import numpy
+import openai
 
 # --- Configuration ---
 NUM_SAMPLES = 100  # Number of test requests per group. 100 is a good start.
@@ -62,7 +64,7 @@ EXPERIMENTAL_GROUPS = [
     {
         "name": "Group 3: Proxied Gemini (gemini-2.5-flash)",
         "client": client_litellm_proxy,
-        "model": "gemini-2.5-flash" # Must match config.yaml
+        "model": "gemini/gemini-2.5-flash" # Must match config.yaml
     }
 ]
 
@@ -181,11 +183,4 @@ def main():
 
 if __name__ == "__main__":
     # Check for required libraries
-    try:
-        import numpy
-        import openai
-    except ImportError as e:
-        print(f"Error: Missing required library. Please install it: pip install {e.name}")
-        exit()
-
     main()
